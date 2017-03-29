@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 #
 # Apply motion stabilization to a video.  Requires ffmpeg to be compiled with
-# vid.stab.
+# vid.stab.  You can get a statically compiled version of ffmpeg for testing
+# purposes from here:
+#
+# https://www.johnvansickle.com/ffmpeg/
 #
 # Usage:
 #
@@ -17,4 +20,4 @@ ffmpeg -i $SHAKY_INPUT_VIDEO \
 
 ffmpeg -i $SHAKY_INPUT_VIDEO -vf \
     vidstabtransform=input=transform_vectors.trf:zoom=1:smoothing=30 \
-    -tune film -b:v 25M -vcodec libx264 -acodec copy -y $SMOOTH_OUTPUT_VIDEO.mp4
+    -tune film -b:v 25M -vcodec libx264 -acodec copy -y $SMOOTH_OUTPUT_VIDEO
