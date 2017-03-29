@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+#
+# Join two videos side by side for visual comparison.
+#
+# Usage:
+#
+# compare-videos video-1.mp4 video-2.mp4 output.mp4
+
+ffmpeg -i $1 -i $2 \
+  -filter_complex '[0:v]pad=iw*2:ih[int];[int][1:v]overlay=W/2:0[vid]' \
+  -map [vid] \
+  -b:v 25M \
+  $3

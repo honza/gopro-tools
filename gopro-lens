@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#
+# Correct the fisheye effect that is present in GoPro videos
+#
+# NOTE: This assumes a GoPro Hero+
+#
+# Usage:
+#
+# gopro-lens input.mp4 output.mp4
+
+ffmpeg -i $1 -vf "lenscorrection=cx=0.5:cy=0.5:k1=-0.227:k2=-0.022" -b:v 25M $2
