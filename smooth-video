@@ -12,12 +12,16 @@
 
 set -e
 
+# If you're using the static download mentioned above, you can set the FFMPEG
+# variable to a path to the "ffmpeg" executable.
+FFMPEG=ffmpeg
+
 SHAKY_INPUT_VIDEO=$1
 SMOOTH_OUTPUT_VIDEO=$2
 
-ffmpeg -i $SHAKY_INPUT_VIDEO \
+$FFMPEG -i $SHAKY_INPUT_VIDEO \
     -vf vidstabdetect=stepsize=6:shakiness=10:accuracy=15:result=transform_vectors.trf -f null -
 
-ffmpeg -i $SHAKY_INPUT_VIDEO -vf \
+$FFMPEG -i $SHAKY_INPUT_VIDEO -vf \
     vidstabtransform=input=transform_vectors.trf:zoom=1:smoothing=30 \
     -tune film -b:v 25M -vcodec libx264 -acodec copy -y $SMOOTH_OUTPUT_VIDEO
