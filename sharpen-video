@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#
+# Sharpen video
+#
+# You can adjust the rate by changing the RATE below.  Negative numbers will
+# cause the video to be blurred.
+#
+# Usage:
+#
+# sharpen-video input.mp4 output.mp4
+
+RATE=3.0
+
+ffmpeg -i $1 -vf unsharp=5:5:$RATE:5:5:$RATE $2

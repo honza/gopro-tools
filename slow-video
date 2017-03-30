@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+#
+# Take a video shot at 60fps and slow it down to 24fps
+#
+# Removes audio
+#
+# Usage:
+#
+# slow-video input.mp4 output.mp4
+
+ffmpeg -i $1 -r 24 -vf "setpts=2.5*PTS" -b:v 25M -an $2
